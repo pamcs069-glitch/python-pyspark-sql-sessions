@@ -6,6 +6,54 @@
 
 ---
 
+## 0. One-Time Setup (students: do this once before opening any notebook)
+
+### Step 1 — Install Python packages
+
+Open a terminal with your Python environment active and run:
+
+```bash
+pip install pyspark sqlalchemy psycopg2-binary requests
+```
+
+### Step 2 — Install the PostgreSQL JDBC jar
+
+PySpark needs a JDBC jar to talk to PostgreSQL. Run **one** of these commands depending on your OS.  
+Use the **same Python** you installed PySpark with (the one your Jupyter kernel uses).
+
+**Windows (PowerShell):**
+```powershell
+$jars = python -c "import pyspark,os; print(os.path.join(os.path.dirname(pyspark.__file__),'jars'))"
+Invoke-WebRequest https://jdbc.postgresql.org/download/postgresql-42.7.3.jar -OutFile "$jars\postgresql-42.7.3.jar"
+```
+
+**macOS / Linux (Terminal):**
+```bash
+JARS=$(python -c "import pyspark,os; print(os.path.join(os.path.dirname(pyspark.__file__),'jars'))")
+curl -L https://jdbc.postgresql.org/download/postgresql-42.7.3.jar -o "$JARS/postgresql-42.7.3.jar"
+```
+
+> If you have **multiple Python versions** (e.g. Python 3.11 and a venv), run the command once **per Python** you plan to use as a Jupyter kernel. The jar goes inside that Python's PySpark `jars/` folder and `db_config.py` finds it automatically.
+
+### Step 3 — Edit credentials in `config/db_config.py`
+
+Open `config/db_config.py` and update the five lines at the top:
+
+```python
+DB_USER = "postgres"   # your PostgreSQL username
+DB_PASS = "your_pass"  # your PostgreSQL password
+DB_HOST = "localhost"
+DB_PORT = "5432"
+DB_NAME = "postgres"
+```
+
+### Step 4 — Select the right Jupyter kernel
+
+In Jupyter: **Kernel → Change Kernel** → pick the Python that has PySpark installed.  
+`db_config.py` auto-detects `sys.executable` so the Spark worker always matches the kernel — no manual env var editing needed.
+
+---
+
 ## 1. Project Architecture
 
 ### Directory Layout
