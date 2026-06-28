@@ -1,2 +1,13 @@
-*.ipynb_checkpoints/
+# Jupyter
 .ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# Python cache
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
