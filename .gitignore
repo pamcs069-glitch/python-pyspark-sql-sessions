@@ -1,4 +1,12 @@
-# Jupyter
+# Personal virtual environments
+myenvjava17/
+.venv/
+myenv/
+
+# VS Code
+.vscode/
+
+# Jupyter runtime
 .ipynb_checkpoints/
 **/.ipynb_checkpoints/
 
@@ -6,8 +14,3 @@
 __pycache__/
 **/__pycache__/
 *.pyc
-*.pyo
-
-# OS
-.DS_Store
-Thumbs.db
